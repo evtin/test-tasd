@@ -1,0 +1,69 @@
+version: '3'
+services:
+  landing-nginx:
+    build:
+      context: ./landing/docker
+      dockerfile: development/nginx/Dockerfile
+    volumes:
+      - ./landing:/app
+    depends_on:
+      - landing-php-fpm
+    ports:
+      - "8080:80"
+
+  landing-php-fpm:
+    build:
+      context: ./landing/docker
+      dockerfile: development/php-fpm/Dockerfile
+    environment:
+      APP_DEBUG: 1
+    volumes:
+      - ./landing:/app
+
+  landing-php-cli:
+    build:
+      context: ./landing/docker
+      dockerfile: development/php-cli/Dockerfile
+    environment:
+      APP_DEBUG: 1
+    volumes:
+      - ./landing:/app
+
+
+  activity-nginx:
+    build:
+      context: ./activity/docker
+      dockerfile: development/nginx/Dockerfile
+    volumes:
+      - ./activity:/app
+    depends_on:
+      - activity-php-fpm
+    ports:
+      - "8081:80"
+
+  activity-php-fpm:
+    build:
+      context: ./activity/docker
+      dockerfile: development/php-fpm/Dockerfile
+    environment:
+      APP_DEBUG: 1
+    volumes:
+      - ./activity:/app
+
+  activity-php-cli:
+    build:
+      context: ./activity/docker
+      dockerfile: development/php-cli/Dockerfile
+    environment:
+      APP_DEBUG: 1
+    volumes:
+      - ./activity:/app
+
+  activity-postgres:
+    image: postgres:12.2-alpine
+    environment:
+      POSTGRES_USER: activity
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: activity
+    ports:
+      - "54321:5432"
