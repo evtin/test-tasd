@@ -38,8 +38,6 @@ services:
       - ./activity:/app
     depends_on:
       - activity-php-fpm
-    ports:
-      - "8081:80"
 
   activity-php-fpm:
     build:
