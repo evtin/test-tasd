@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Страницы{% endblock %}
+
+{% block body %}
+    <h1>Страницы</h1>
+    <ul>
+        {% for page in pages %}
+            <li>
+                <a href="/page/{{ page }}">Страница {{ page }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/admin/activity">История активности</a>
+{% endblock %}

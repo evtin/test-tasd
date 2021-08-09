@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}История активности{% endblock %}
+
+{% block body %}
+    <h1>История активности</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">URL</th>
+            <th scope="col">Количество визитов</th>
+            <th scope="col">Последнее посещение</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activiy in activities %}
+            <tr>
+                <td>{{ activiy.url }}</td>
+                <td>{{ activiy.countVisits }}</td>
+                <td>{{ activiy.lastVisit|date('H:i:s d.m.Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
