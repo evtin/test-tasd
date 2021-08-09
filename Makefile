@@ -1,5 +1,5 @@
 up: docker-up
-init: docker-down-clear docker-pull docker-build docker-up landing-init activity-composer-install
+init: docker-down-clear docker-pull docker-build docker-up landing-init activity-init
 
 docker-up:
 	docker-compose up -d
@@ -20,7 +20,6 @@ landing-init: landing-composer-install
 
 landing-composer-install:
 	docker-compose run --rm landing-php-cli composer install
-
 
 activity-init: activity-composer-install activity-migrations
 

@@ -14,10 +14,10 @@ class PageSubscriber implements EventSubscriberInterface
 {
     private ActivityClientInterface $sender;
 
-    public function __construct(ActivityClientInterface  $sender)
-    {
-        $this->sender = $sender;
-    }
+   public function __construct(ActivityClientInterface  $sender)
+   {
+       $this->sender = $sender;
+   }
 
     public static function getSubscribedEvents(): array
     {
@@ -31,6 +31,7 @@ class PageSubscriber implements EventSubscriberInterface
         if (!$event->isMainRequest()){
             return;
         }
-        $this->sender->sendActivity($event->getRequest()->getRequestUri(), new DateTimeImmutable());
+
+        $this->sender->sendActivity($event->getRequest()->getPathInfo(), new DateTimeImmutable());
     }
 }

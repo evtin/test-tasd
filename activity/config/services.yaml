@@ -34,12 +34,9 @@ services:
     App\Method\ActivityIndexMethod:
         tags: [ { method: 'activity.index', name: 'json_rpc_http_server.jsonrpc_method' } ]
 
-    App\Repository\ActivityRepository:
-        class: App\Repository\ActivityRepository
+    App\Repository\ActivityRepository: ~
 
-    App\Repository\Flusher:
-        class: App\Repository\Flusher
+    App\Repository\Flusher: ~
 
-    App\UseCase\Create\Handler:
-        class: App\UseCase\Create\Handler
+    App\UseCase\Create\Handler: ~
 

@@ -2,33 +2,25 @@
 
 namespace App\Method;
 
+use App\Repository\ActivityFetcher;
+use Doctrine\DBAL\Driver\Exception;
 use Yoanm\JsonRpcServer\Domain\JsonRpcMethodInterface;
 
 class ActivityIndexMethod implements JsonRpcMethodInterface
 {
+    private ActivityFetcher $activities;
+
+    public function __construct(ActivityFetcher $activities)
+    {
+        $this->activities = $activities;
+    }
+
     public function apply(array $paramList = null)
     {
-        return [
-            [
-                'url' => '/',
-                'countVisits' => 30,
-                'lastVisit' => '2021-08-08 21:56:52',
-            ],
-            [
-                'url' => '/',
-                'countVisits' => 30,
-                'lastVisit' => '2021-08-08 21:56:52',
-            ],
-            [
-                'url' => '/',
-                'countVisits' => 30,
-                'lastVisit' => '2021-08-08 21:56:52',
-            ],
-            [
-                'url' => '/',
-                'countVisits' => 30,
-                'lastVisit' => '2021-08-08 21:56:52',
-            ],
-        ];
+        try {
+            return $this->activities->getAll();
+        } catch (Exception | \Doctrine\DBAL\Exception $e) {
+            return [];
+        }
     }
 }
